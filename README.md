@@ -145,7 +145,7 @@
 * class : bad/ good
 
 #### 自變數
-
+resience_since : 不確定因子定義，且與class 進行T檢定後沒有足夠的證據證明class兩類別因子平均值存在顯著差異，因此排除此因子。
 
 
 
