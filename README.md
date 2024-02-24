@@ -1,0 +1,2 @@
+# prac_credit_g
+透過openml中credit_g資料集練習
