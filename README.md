@@ -2,7 +2,7 @@
 * 資料來源 : [網址](https://www.openml.org/search?type=data&status=active&id=31)
 * 資料簡述 : 依據顧客資料評估顧客風險(class = bad/ good)
 
-## ETL
+## EDA
 
 ### NULL 值確認
 * 確認所有欄位皆無 Null 值
@@ -139,5 +139,25 @@
 | foreign_worker       | 5.822       | 0.0158    | 兩變數存在顯著關聯        |
 | age_adj              | 22.989      | 0.0177    | 兩變數存在顯著關聯        |
 | sex                  | 5.349       | 0.0207    | 兩變數存在顯著關聯        |
+
+## 建模資料調整
+#### 應變數:
+* class : bad/ good
+
+#### 自變數
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
