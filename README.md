@@ -28,6 +28,8 @@
   * 僅有1或2個人，其中需撫養1人的佔84.5%
   * **猜測**扶養兩人以上的顧客bad的可能性越高
 ##### 類別型變數
+* class : 目標變數(bad/good)
+  * bad : good = 30% : 70% 
 * checking_status : 現有支票帳戶的狀態，以德國馬克計算。
   * 以no_checking的人最多(39.4%)，但沒有很顯著的分佈差異。
 * credit_history : 信用歷史
@@ -63,8 +65,35 @@
   * 男 : 女 = 69 : 31
  
 * other_parties : 其他債務人/保證人
+  * 共有三種值，分別為 none(90.7%)/ guarantor(保證人 5.2%)/ co applicant(共同申請人 4.1%)
+  * 超過90%集中在none，可考慮排除此變數不使用。(需確認與class的關係)
 
+* property_magnitude : 其他資產持有狀態
+  * 持有車、不動產、壽險或未知是否持有其他資產
+  * 可與purpose比較，確認資料是否正確
+    * purpose = new car/ used car 但沒有car
 
+* other_payment_plans : 其他分期付款計劃（銀行、商店）
+  * 分為 none(81.4%)、bank(13.9%)、stores(4.7%)
+  * **猜測**不確定bank、stores是否需要付利息，假設需要，預想會做此種交易代表現金可能不足，bad機會較高?
+  * 可以確認bank+stores是否有較多的bad
 
+* housing : 房屋持有狀態(自有/租賃..)
+  * own(71.3%)、rent(17.9%)、for free(10.8%)
+* job : 工作
+
+| 值                            | 中文說明                     | 佔比   |
+|-------------------------------|------------------------------|-------|
+| skilled                       | 技術熟練工                   | 63%   |
+| unskilled resident            | 未熟練工（本地居民）         | 20%   |
+| high qualif/self emp/mgmt     | 高資質/自僱/管理職           | 14.8% |
+| unemp/unskilled non res       | 失業/未熟練工（非本地居民）   | 2.2%  |
+
+* own_telephone : yes/no
+  * 不太確定此欄位本身定義，yes佔比為40.4%(none: 59.6%)，可再觀察與class交集狀況。
+ 
+* foreign_worker : 外籍工作者(yes/no)
+  * yes: 96.3% 近乎全部為外籍。 
+  
 ### 資料確認- 與class交集概況確認
 
