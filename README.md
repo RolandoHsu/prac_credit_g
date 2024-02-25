@@ -105,7 +105,13 @@
   | no credits/all paid            | 無信貸/全部支付   |
   | all paid                       | 全部支付          |
 
-  *  no credits/all paid(4%)、all paid(4.9%) 單看定義有點接近，將細部去看跟class的關係，決定是否合併。 
+  *  no credits/all paid(4%)、all paid(4.9%) 單看定義有點接近，將細部去看跟class的關係，決定是否合併。
+    * 篩選no credits/all paid、all paid兩種類別，計算bad/good佔比差異後，依卡方檢定結果，兩客群的class分布無顯著差異(p-value= 0.768)，且依描述，no credits/all paid與all paid可能都是all paid，因此將兩種客群整合為normal顧客。
+      
+    | credit_history | bad | good |
+    |----------------|-----|------|
+    | no credits/all paid|  25 |   15 |
+    | all paid       |  28 |   21 |
 
 * purpose : 貸款目的
   * 以radio/tv(28%)、new car(23.4%)、furniture/equipment(18.1%) 為最大宗。
@@ -132,8 +138,20 @@
 
 * property_magnitude : 其他資產持有狀態
   * 持有車、不動產、壽險或未知是否持有其他資產
-  * 可與purpose比較，確認資料是否正確
-    * purpose = new car/ used car 但沒有car
+  * 可與purpose比較，確認資料是否正確 --> purpose = new car/ used car 但沒有car
+    * purpose 為new car / used car的顧客但沒有實體資產car，代表幾種可能
+      * purpose 可能失準(EX: 顧客亂填)
+      * property_magnitude 可能失準(EX: 僅標示一種資產or 無法查證)，但因其他資產持有狀態可能是查詢顧客繳稅等資訊，想像上失準的可能性較低。
+      * 可能因時間差，導致如下結果(EX: 顧客貸款買車，但可能因意外導致車子損壞，或車子是為了家人購買..等)
+
+    | property_magnitude   | num |
+    |----------------------|---------|
+    | car                  | 110     |
+    | life insurance       | 72      |
+    | no known property    | 70      |
+    | real estate          | 85      |
+    ||(上表客群為purpose 為new car / used car)|
+
 
 * other_payment_plans : 其他分期付款計劃（銀行、商店）
   * 分為 none(81.4%)、bank(13.9%)、stores(4.7%)
