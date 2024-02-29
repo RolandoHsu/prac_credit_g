@@ -196,14 +196,118 @@
 | age_adj              | 22.989      | 0.0177    | 兩變數存在顯著關聯        |
 | sex                  | 5.349       | 0.0207    | 兩變數存在顯著關聯        |
 
-## 建模資料調整
-#### 應變數:
-* class : bad/ good
+## 建模
+#### 因子選擇
+* 原始資料建模
 
-#### 自變數
-resience_since : 不確定因子定義，且與class 進行T檢定後沒有足夠的證據證明class兩類別因子平均值存在顯著差異，因此排除此因子。
+| 類別                           | 因子                                             | 數值        |
+|------------------------------|-------------------------------------------------|-------------|
+| 因子總數                      |                                                 | 21          |
+| 最佳參數                      | max_depth                                       | 10          |
+| 最佳參數                      | n_estimators                                    | 300         |
+| AUC分數                      | 最佳AUC分數                                     | 80.51%      |
+| AUC分數                      | 測試AUC分數                                     | 77.15%      |
+| 因子貢獻度                    | credit_amount                                   | 9.547%      |
+| 因子貢獻度                    | duration                                        | 7.962%      |
+| 因子貢獻度                    | age                                             | 6.793%      |
+| 因子貢獻度                    | checking_status_no checking                     | 5.529%      |
+| 因子貢獻度                    | checking_status_<0                              | 4.911%      |
+| 因子貢獻度                    | credit_history_normal                           | 4.300%      |
+| 因子貢獻度                    | installment_commitment                          | 3.140%      |
+| 因子貢獻度                    | residence_since                                 | 2.628%      |
+| 因子貢獻度                    | credit_history_critical/other existing credit   | 2.372%      |
+| 因子貢獻度                    | purpose_new car                                 | 1.935%      |
+
+* 排除無顯著性的變數: residence_since/ existing_credits/ num_dependents/ job/ own_telephone
+* 刪除無顯著性變數後，測試AUC分數有提升。
+
+| 類別                           | 因子                                             | 數值        |
+|------------------------------|-------------------------------------------------|-------------|
+| 因子總數                      |                                                 | 16          |
+| 最佳參數                      | max_depth                                       | 10          |
+| 最佳參數                      | n_estimators                                    | 300         |
+| AUC分數                      | 最佳AUC分數                                     | 79.88%      |
+| AUC分數                      | 測試AUC分數                                     | 77.29%      |
+| 因子貢獻度                    | credit_amount                                   | 10.920%     |
+| 因子貢獻度                    | duration                                        | 9.224%      |
+| 因子貢獻度                    | age                                             | 7.848%      |
+| 因子貢獻度                    | checking_status_no checking                     | 6.526%      |
+| 因子貢獻度                    | checking_status_<0                              | 5.123%      |
+| 因子貢獻度                    | credit_history_normal                           | 4.431%      |
+| 因子貢獻度                    | installment_commitment                          | 3.367%      |
+| 因子貢獻度                    | credit_history_critical/other existing credit   | 2.390%      |
+| 因子貢獻度                    | savings_status_<100                             | 2.101%      |
+| 因子貢獻度                    | purpose_new car                                 | 1.991%%      |
+
+* 排除無顯著性的變數: existing_credits/ num_dependents/ job/ own_telephone
+* PS: residence_since 為前十大顯著性變數，保留此變數反而使AUC分數皆有所提升。
 
 
+| 類別                           | 因子                                             | 數值        |
+|------------------------------|-------------------------------------------------|-------------|
+| 因子總數                      |                                                 | 17          |
+| 最佳參數                      | max_depth                                       | 10          |
+| 最佳參數                      | n_estimators                                    | 300         |
+| AUC分數                      | 最佳AUC分數                                     | 80.50%      |
+| AUC分數                      | 測試AUC分數                                     | 77.91%      |
+| 因子貢獻度                    | credit_amount                                   | 11.167%     |
+| 因子貢獻度                    | duration                                        | 8.707%      |
+| 因子貢獻度                    | age                                             | 7.444%      |
+| 因子貢獻度                    | checking_status_no checking                     | 6.197%      |
+| 因子貢獻度                    | checking_status_<0                              | 5.234%      |
+| 因子貢獻度                    | credit_history_normal                           | 4.320%      |
+| 因子貢獻度                    | installment_commitment                          | 3.334%      |
+| 因子貢獻度                    | residence_since                                 | 2.878%      |
+| 因子貢獻度                    | credit_history_critical/other existing credit   | 2.601%      |
+| 因子貢獻度                    | savings_status_<100                             | 2.273%      |
+
+* 刪除 personal_status, foreign_worker, residence_since, existing_credits, num_dependents, job, own_telephone
+  * personal_status: 結合顧客性別及婚姻狀況，以婚姻狀況來說，女性無區分，男性又將已婚/鰥夫放在一起，資料定義較為混亂。 --> 將擷取female/male，新增為sex變數。
+  * foreign_worker: 因資料內96.3%為Yes，因此排除此因子。
+  * residence_since: 無顯著性的變數
+  * existing_credits: 無顯著性的變數
+  * num_dependents: 無顯著性的變數
+  * job: 無顯著性的變數
+  * own_telephone: 無顯著性的變數
+
+| 類別                           | 因子                                             | 數值        |
+|------------------------------|-------------------------------------------------|-------------|
+| 欄位個數                      |                                                 | 14          |
+| 最佳參數                      | max_depth                                       | 10          |
+| 最佳參數                      | n_estimators                                    | 300         |
+| AUC分數                      | 最佳AUC分數                                     | 80.88%      |
+| AUC分數                      | 測試AUC分數                                     | 77.95%      |
+| 因子貢獻度                    | credit_amount                                   | 11.612%     |
+| 因子貢獻度                    | duration                                        | 9.366%      |
+| 因子貢獻度                    | age                                             | 8.417%      |
+| 因子貢獻度                    | checking_status_no checking                     | 6.673%      |
+| 因子貢獻度                    | checking_status_<0                              | 5.203%      |
+| 因子貢獻度                    | credit_history_normal                           | 4.609%      |
+| 因子貢獻度                    | installment_commitment                          | 3.670%      |
+| 因子貢獻度                    | credit_history_critical/other existing credit   | 2.675%      |
+| 因子貢獻度                    | savings_status_<100                             | 2.260%      |
+| 因子貢獻度                    | purpose_new car                                 | 2.114%      |
+
+#### 模型選擇
+| 類別       | 因子                | 數值        |
+|----------|--------------------|-------------|
+| 模型資訊  |                    | 決策樹      |
+| 欄位個數  |                    | 14          |
+| 最佳參數  | max_depth          | None        |
+| 最佳參數  | min_samples_leaf   | 5           |
+| 最佳參數  | min_samples_split  | 20          |
+| AUC分數  | 最佳AUC分數        | 73.09%      |
+| AUC分數  | 測試AUC分數        | 66.21%      |
+
+
+| 類別       | 因子                | 數值        |
+|----------|--------------------|-------------|
+| 模型資訊  |                    | 隨機森林    |
+| 欄位個數  |                    | 14          |
+| 最佳參數  | max_depth          | 10          |
+| 最佳參數  | n_estimators       | 300         |
+| AUC分數  | 最佳AUC分數        | 80.88%      |
+| AUC分數  | 測試AUC分數        | 77.95%      |
 
 
 
