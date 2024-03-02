@@ -115,6 +115,21 @@
 
 * purpose : 貸款目的
   * 以radio/tv(28%)、new car(23.4%)、furniture/equipment(18.1%) 為最大宗。
+
+| purpose             | credit_amount | duration |
+|---------------------|---------------|----------|
+| other               | 6948.0        | 24.0     |
+| used car            | 4788.0        | 24.0     |
+| business            | 3161.0        | 24.0     |
+| furniture/equipment | 2578.0        | 18.0     |
+| new car             | 1980.0        | 15.0     |
+| radio/tv            | 1890.0        | 18.0     |
+| education           | 1884.5        | 15.0     |
+| repairs             | 1749.0        | 16.5     |
+| domestic appliance  | 1249.0        | 13.5     |
+| retraining          | 932.0         | 12.0     |
+(註: 數值為兩個因子的中位數)
+  
 * savings_status : 儲蓄帳戶/債券的狀態(馬克)
   * <100 的佔比為60.3%。
 * employment : 工作年數
