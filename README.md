@@ -1,3 +1,9 @@
+## 程式碼說明
+1. save_data_to_mysql.py: 將原始資料儲存至mysql，方便後續取用。
+2. EDA.py: 資料觀察。
+3. data_cleam.py: 根據EDA結果以及模型建置需要，做資料清理。
+4. build_model.py: 模型建置。
+
 ## 資料源資訊
 * 資料來源 : [網址](https://www.openml.org/search?type=data&status=active&id=31)
 * 資料簡述 : 依據顧客資料評估顧客風險(class = bad/ good)
